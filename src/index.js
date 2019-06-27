@@ -9,7 +9,7 @@ class HOME extends React.Component{
         return(
            <Router> 
              <div>
-                   <Route exact path="/" Component={App}/>
+                <Route path="/" exact={true} component={App} />
              </div>
             </Router>
         )
