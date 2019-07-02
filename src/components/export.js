@@ -1,8 +1,13 @@
 import React from 'react';
+import Download from '@axetroy/react-download'
 
 class ExportComponent extends React.Component{
     render(){
-      return(
+     
+        let data=["www.google.com"]; 
+        let jsonData = JSON.stringify(data);
+
+        return(
           <div>
               <div className="container-fluid text-center">
                   <br/>
@@ -13,14 +18,12 @@ class ExportComponent extends React.Component{
                  <div className="row">
                       <div className="col-sm-8">
                           <select name="type" onChange={this.onChange} className="form-control col-md-5">
-                             <option value="collections">Collection1</option>
-                             <option value="collections">Collection1</option>
-                             <option value="collections">Collection1</option>
+                             <option value="collections">{data}</option>
                           </select>
                       </div>
-                       <div className="col-sm-4">
+                       <Download className="col-sm-4" file="test.json" content = {jsonData}>
                           <button type="button" className="btn btn-secondary">Export</button>
-                      </div>
+                      </Download>
                   </div>
              </div>
           </div>
