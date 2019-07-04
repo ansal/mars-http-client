@@ -4,8 +4,9 @@ import Download from '@axetroy/react-download'
 class ExportComponent extends React.Component{
     render(){
      
-        let data=["www.google.com"]; 
-        let jsonData = JSON.stringify(data);
+        let data = ('{ "name":"John", "age":30, "city":"New York"}')
+        let stringData = JSON.stringify(data)
+        let parseData = JSON.parse(stringData)
 
         return(
           <div>
@@ -21,7 +22,7 @@ class ExportComponent extends React.Component{
                              <option value="collections">{data}</option>
                           </select>
                       </div>
-                       <Download className="col-sm-4" file="test.json" content = {jsonData}>
+                       <Download className="col-sm-4" file="test.json" content = {parseData}>
                           <button type="button" className="btn btn-secondary">Export</button>
                       </Download>
                   </div>
