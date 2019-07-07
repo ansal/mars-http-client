@@ -50,6 +50,7 @@ class HistoryComponents extends React.Component {
               </div>
               <div className="card-body">
 
+<<<<<<< HEAD
                 <button type="button" className="btn btn-secondary">new collection</button>
                 <button type="button" className="btn btn-secondary  offset-md-1">trash</button>
               </div>
@@ -61,6 +62,29 @@ class HistoryComponents extends React.Component {
                 <div className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">today</a>
                 </div>
+=======
+                <button  type="button" className="btn btn-secondary">new collection</button>
+                <button type="button" className="btn btn-secondary  offset-md-1">trash</button>
+              </div>
+                 <hr />
+
+              <div>
+                <ul>
+                  <div className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">today</a>
+                  </div>
+                </ul>
+                <ul>
+                  <div>
+                    <a href="http://postman/header">http1</a><br />
+                    <a href="http://postman/header">http2</a><br />
+                    <a href="http://postman/header">http3</a>
+                  </div>
+                </ul>
+                <ul>
+                  <div className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">yesterday</a>
+>>>>>>> 14d65297cae6f9ee824274eb17fcc6d216798752
 
                 <table>
                   <tr>
@@ -83,11 +107,22 @@ class HistoryComponents extends React.Component {
 
           </div>
 
+<<<<<<< HEAD
         </div>
 
       </div>
+=======
+          </div>
+          
+          </div>
+>>>>>>> 14d65297cae6f9ee824274eb17fcc6d216798752
     );
   }
 }
 
+<<<<<<< HEAD
 export default HistoryComponents;
+=======
+
+export default HistoryComponents;
+>>>>>>> 14d65297cae6f9ee824274eb17fcc6d216798752
