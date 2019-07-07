@@ -1,69 +1,109 @@
 import React from 'react';
 
 class EditCollectionComponent extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        name: "",
+        type: "",
+        description: "",
+
+        formState: {
+            isFormValid: true,
+            isNameValid: true,
+            isDescriptionValid: true,
+        }
+    }
+    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+onChange(event) {
+    //let name = event.target.name : can use both ways, variable or direct.
+
+    this.setState({
+        [event.target.name]: event.target.value,
+    })
+
+}
+
+validateform() {
+    let newFormState = {
+        isFormValid: true,
+        isNameValid: true,
+        isDescriptionValid: true,
+    }
+    
+    if (!this.state.name) {
+        newFormState.isNameValid = false;
+        newFormState.isFormValid = false;
+    }
+
+    if (!this.state.description) {
+        newFormState.isDescriptionValid = false;
+        newFormState.isFormValid = false;
+}
+this.setState({
+    formState: newFormState
+});
+
+return newFormState.isFormValid;
+
+}
+
+handleSubmit(event) {
+    event.preventDefault();
+    if(!this.validateform()) { return; }
+}
+
+render() {
+
+    
     return (
+        <div>
+            <h2>Edit Collection</h2>
+            <hr />
+            {
+                !this.state.formState.isFormValid &&
+                <div className="alert alert-danger">Please fill in all the fields and try again </div>
+            }
+            <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="" >
+                        Collection Name:
+                    <input
+                            name="name"
+                            onChange={this.onChange}
+                            className={`form-control ${!this.state.formState.isFormValid &&
+                                "is-invalid"}`}
+                            type="text"
 
-
-      <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">SkyLark</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  New
-        </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Request</a>
-                  <a class="dropdown-item" href="#">Collection</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#"></a>
+                        />
+                    </label>
                 </div>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Import <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Open New</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Settings</a>
-              </li>
-            </ul>
-            {/* <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> */}
-          </div>
-        </nav>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="offset-md-4 col-md-4">
-              <h3> Edit Collection </h3>
-              <hr />
-              <form action="">
-              Name of Collection
-              <input type="text" size="32" placeholder="Name of Collection"/>
-              <hr/>  
-              Description:
-              <textarea rows="4" cols="50" placeholder="Give description of request to make things easier">
-              
-            </textarea>
-            <button  style={{marginRight: 16}} type="submit" className="btn btn-secondary"> Cancel </button>
-            <button type="submit" className="btn btn-success"> Update </button>
-              </form>
-            </div>
-          </div>
+                
+
+                <div className="form-group">
+                    <label htmlFor="" >
+                        Description:
+                    <textarea placeholder="Give description of request to make things easier"
+                            name="description"
+                            onChange={this.onChange}
+                            cols="30"
+                            rows="5"
+                            className={`form-control ${!this.state.formState.isDescriptionValid &&
+                                "is-invalid"}`}
+                        >
+                        </textarea>
+
+                    </label>
+                </div>
+                <button style={{marginRight: 16}}type="submit" className="btn btn-secondary"> Cancel </button>
+                <button type="submit" className="btn btn-success"> Edit </button>
+
+            </form>
         </div>
-
-      </div>
-
     )
   }
 }
