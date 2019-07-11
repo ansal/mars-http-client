@@ -21,14 +21,15 @@ function getAllItems(name) {
 function getOneItem(name, id) {
     // First get all items and do a loop to find out the one with id passed
     // Arguments needed are name and id
-    let storage = localStorage.getItem(name);
-    var items = JSON.parse(storage);
+    let items = getAllItems(name);
     var item;
+
     for(var i=0; i<items.length; i++) {
-        if(items.id === id) {
+        if(items[i].id === id) {
             item = localStorage.getItem(items[i]);
         }
     }
+
     return item;
 }
 
@@ -43,8 +44,9 @@ function removeOneItem(name, id) {
     // retrieve all the items, parse, remove the item with id from array, stringiy and set in localstorage
     let items = getAllItems(name);
     var item;
+
     for(var i=0; i<items.length; i++) {
-        if(items.id === id) {
+        if(items[i].id === id) {
             item = localStorage.removeItem(items[i]);
             item = JSON.stringify(item);
             return localStorage.setItem(name, item);
@@ -52,4 +54,15 @@ function removeOneItem(name, id) {
     }
 }
 
-export {createItem, getAllItems, getOneItem, removeAllItems, removeOneItem};
+function editItem(name, id) {
+    let items = getAllItems(name);
+    var item;
+
+    for(var i=0; i<items.length; i++) {
+        if(items[i].id === id) {
+            return localStorage.setItem(name, JSON.stringify(items[i]));
+        }
+    }
+}
+
+export {createItem, getAllItems, getOneItem, removeAllItems, removeOneItem, editItem};
