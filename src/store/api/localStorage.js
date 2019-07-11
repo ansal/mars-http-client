@@ -1,17 +1,13 @@
-var history = {
-    "name": "history revisiting",
-    "topic": "Indian history"
-};
-
 function createItem(name, object) {
-    localStorage.setItem(name, JSON.stringify(object));
-    object.id = name + Math.random() + new Date();
     let storage = localStorage.getItem(name);
+    var data = JSON.parse(storage);
 
-    return storage;
+    object.id = name + Math.random() + new Date();
+
+    data.push(object);
+    data = JSON.stringify(data);
+    localStorage.setItem(name, data);
 }
-
-createItem("historyData", history);
 
 function getAllItems(name) {
     // Need name argument
