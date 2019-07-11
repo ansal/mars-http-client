@@ -11,7 +11,7 @@ import listCollectionReducer from "./reducers/listCollectionReducer.js";
 import createHistoryReducer from "./reducers/createHistoryReducer.js";
 import fetchHistoryReducer from "./reducers/fetchHistoryReducer.js";
 import getOneHistoryReducer from "./reducers/getOneHistoryReducer.js";
-import saveHistoryReducer from "./reducers/saveHistoryReducer.js";
+
 
 let reducer = combineReducers({
     listCollection: listCollectionReducer,
