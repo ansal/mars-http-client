@@ -1,5 +1,5 @@
 import React from 'react';
-import listCollectionsComponent from './components/listCollectionsComponent.js'
+import ListCollectionsComponent from './listCollections.js'
 
 class App extends React.Component{
     render(){
@@ -7,7 +7,7 @@ class App extends React.Component{
            
              <div>
                   <h2>hello</h2>
-                  <listCollectionsComponent />
+                  <ListCollectionsComponent />
              </div>
             
         )

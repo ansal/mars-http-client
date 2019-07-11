@@ -1,6 +1,8 @@
 import React from 'react'; 
+import {connect} from 'react-redux';
+//import { stateMapper } from '../store/store.js';
 
-class ImportFile extends React.Component{
+class ImportComponent extends React.Component{
     
     // constructor(props){
     //     super(props);
@@ -9,16 +11,19 @@ class ImportFile extends React.Component{
     //         files : null,
     //     }
     //     this.inputChanged=this.inputChanged.bind(this)
-        
+    //     this.importButton=this.importButton.bind(this)
     // }     
 
     inputChanged(event){
+     //let files = this.setState.files
      let files = event.target.files;
+     console.log(files)
      let fileName = files[0].name
      let validExt = /\.json/g;
      let file = validExt.exec(fileName);
-     if(!file){
+     if(!file ){
         alert("upload json file")
+        console.log("here")
         return
     }else{
         let reader = new FileReader();
@@ -28,6 +33,13 @@ class ImportFile extends React.Component{
         reader.readAsText(files[0]);
      }
     }
+
+    // importButton(event){
+    //     this.props.dispatch({
+    //         type : "IMPORT_COLLECTION",
+    //         files: this.state.files
+    //     })
+    // }
     
     render(){
         return(
@@ -48,7 +60,7 @@ class ImportFile extends React.Component{
                         </label>
                         </form>
                     </div>
-                    <button className = "btn btn-secondary"> IMPORT </button>
+                    <button onClick={this.importButton} className = "btn btn-secondary"> IMPORT </button>
                 </div>
             </div>
          </div>
@@ -56,4 +68,6 @@ class ImportFile extends React.Component{
     }
 }
 
-export default ImportFile; 
+//let importFile = connect(stateMapper)(ImportComponent)
+
+export default ImportComponent; 
