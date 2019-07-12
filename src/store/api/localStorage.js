@@ -67,7 +67,7 @@ function editItem(name, id, newData) {
             items[i] = newData;
         }
     }
-    return localStorage.setItem(name, JSON.stringify(items[i]));
+    return localStorage.setItem(name, JSON.stringify(items));
 }
 
 export {createItem, getAllItems, getOneItem, removeAllItems, removeOneItem, editItem};
