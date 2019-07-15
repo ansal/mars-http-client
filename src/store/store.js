@@ -6,14 +6,21 @@ import importCollectionsReducer from "./reducers/importCollectionsReducer.js";
 import isUrlLoadingReducer from "./reducers/isUrlLoadingReducer.js";
 import requestResponseReducer from "./reducers/requestResponseReducer.js";
 import saveHistoryReducer from "./reducers/saveHistoryReducer.js";
+import requestReducer from "./reducers/requestReducer.js";
+import paramsReducer from "./reducers/paramsReducer.js";
+import headersReducer from "./reducers/headersReducer.js";
+import bodyReducer from "./reducers/bodyReducer.js";
 
-let reducer = combineReducers({
-    
+let reducer = combineReducers({ 
     createCollection: createCollectionReducer,
     importCollections: importCollectionsReducer,
     isUrlLoading: isUrlLoadingReducer,
     requestResponse: requestResponseReducer,
-    saveHistory: saveHistoryReducer
+    saveHistory: saveHistoryReducer,
+    request: requestReducer,
+    params: paramsReducer,
+    headers: headersReducer,
+    body: bodyReducer
 })
 
 
@@ -22,7 +29,6 @@ let store = createStore(reducer);
 store.subscribe(() => {
     console.log("store dispatch ==>", store.getState());
 });
-
 
 function stateMapper(state) {
     return state;
