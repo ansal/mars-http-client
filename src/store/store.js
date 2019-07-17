@@ -10,6 +10,7 @@ import requestReducer from "./reducers/requestReducer.js";
 import paramsReducer from "./reducers/paramsReducer.js";
 import headersReducer from "./reducers/headersReducer.js";
 import bodyReducer from "./reducers/bodyReducer.js";
+import fetchUrlReducer from "./reducers/apiReducer.js"
 
 let reducer = combineReducers({ 
     createCollection: createCollectionReducer,
@@ -20,7 +21,8 @@ let reducer = combineReducers({
     request: requestReducer,
     params: paramsReducer,
     headers: headersReducer,
-    body: bodyReducer
+    body: bodyReducer,
+    api : fetchUrlReducer
 })
 
 
