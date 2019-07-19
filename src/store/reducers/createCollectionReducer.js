@@ -1,5 +1,3 @@
-import {store} from '../store.js';
-
 
 function createCollectionReducer(newCollection=[], action) {
     
@@ -8,8 +6,8 @@ function createCollectionReducer(newCollection=[], action) {
     }
     
     if(action.type === "CREATE_COLLECTION"){
-        //Todo;
-        return newCollection;
+        
+        return action.formData;
     }
     
     if(action.type === "COLLECTION_CREATED"){

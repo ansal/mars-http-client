@@ -6,23 +6,25 @@ import importCollectionsReducer from "./reducers/importCollectionsReducer.js";
 import isUrlLoadingReducer from "./reducers/isUrlLoadingReducer.js";
 import requestResponseReducer from "./reducers/requestResponseReducer.js";
 import saveHistoryReducer from "./reducers/saveHistoryReducer.js";
-import requestReducer from "./reducers/requestReducer.js";
-import paramsReducer from "./reducers/paramsReducer.js";
-import headersReducer from "./reducers/headersReducer.js";
-import bodyReducer from "./reducers/bodyReducer.js";
-import fetchUrlReducer from "./reducers/apiReducer.js"
+import editCollectionReducer from "./reducers/editCollectionReducer.js";
+import listCollectionReducer from "./reducers/listCollectionReducer.js";
+import createHistoryReducer from "./reducers/createHistoryReducer.js";
+import fetchHistoryReducer from "./reducers/fetchHistoryReducer.js";
+import getOneHistoryReducer from "./reducers/getOneHistoryReducer.js";
 
-let reducer = combineReducers({ 
+
+let reducer = combineReducers({
+    listCollection: listCollectionReducer,
     createCollection: createCollectionReducer,
+    editCollection: editCollectionReducer,
     importCollections: importCollectionsReducer,
     isUrlLoading: isUrlLoadingReducer,
     requestResponse: requestResponseReducer,
     saveHistory: saveHistoryReducer,
-    request: requestReducer,
-    params: paramsReducer,
-    headers: headersReducer,
-    body: bodyReducer,
-    api : fetchUrlReducer
+    createHistory: createHistoryReducer,
+    fetchHistory: fetchHistoryReducer,
+    getOneHistory: getOneHistoryReducer,
+    saveHistory: saveHistoryReducer
 })
 
 
