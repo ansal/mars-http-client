@@ -70,4 +70,15 @@ function editItem(name, id, newData) {
     return localStorage.setItem(name, JSON.stringify(items));
 }
 
-export {createItem, getAllItems, getOneItem, removeAllItems, removeOneItem, editItem};
+function saveItem(name, id, newData) {
+    let items = getAllItems(name);
+
+    for(var i=0; i<items.length; i++) {
+        if(items[i].id === id) {
+            items[i] = newData;
+        }
+    }
+    return localStorage.setItem(name, JSON.stringify(items));
+}
+
+export {createItem, getAllItems, getOneItem, removeAllItems, removeOneItem, editItem, saveItem};

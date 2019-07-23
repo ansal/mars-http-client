@@ -6,7 +6,7 @@ function requestReducer(urlData = {}, action) {
 
     // console.log("Entered request reducer");
 
-    if(action.type === "REQUEST"){
+    if(action.type === "REQUEST_&_HISTORY"){
         // console.log("Entered request reducer get");
         // // sendRequest(store, action);
         // console.log(action);

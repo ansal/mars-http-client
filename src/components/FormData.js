@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 
 import {stateMapper} from '../store/store.js';
 import Request from './Request.js';
+import Response from './Response.js';
+import Menu from './Menu.js';
+import SideNav from './SideNav.js';
 
 class FormDataComponent extends React.Component {
     constructor(props) {
@@ -114,37 +117,54 @@ class FormDataComponent extends React.Component {
     render() {
         return(
             <div>
-                <div className="container-fluid offset-md-3">
-                    <Request />
-                    <br/>
-                    <p><strong>Form-Data</strong></p>
-                    <form onSubmit={this.handleSubmit}>
-
-                    
-                    <div className="table-responsive">
-                        <table className="table table-hover col-md-6" id="table">
-                            <thead className="thead-dark">
-                                <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Key</th>
-                                <th scope="col">Value</th>
-                                <th scope="col">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className="tableRow">
-                                <td><input type="checkbox" name="check" className="checked" onClick={this.isChecked} /></td>
-                                <td><input type="text" name="key" className="inputBox" onChange={this.inputText} /></td>
-                                <td><input type="text" name="value" className="inputBox" onChange={this.inputText} /></td>
-                                <td><input type="text" name="description" className="inputBox" onChange={this.inputText} /></td>
-                                <td><button type="submit" className="btn btn-danger delete oi oi-trash" onClick={this.buttonDelete} /></td>
-                                </tr>   
-                            </tbody>
-                        </table>
+                <div className="row">
+                    <div className="col-md-12">
+                        <Menu />
                     </div>
-                    <button type="submit" className="btn btn-success offset-md-5">Send</button>
-                    </form>
-                    <button type="submit" onClick={this.buttonClick} className="offset-md-3 btn btn-success oi oi-plus btn-lg" id="button" />
+                </div>
+
+                <br />
+
+                <div className="row">
+                    <div className="col-md-3">
+                        <SideNav />
+                    </div>
+
+                    <div className="col-md-9">
+                        <Request />
+                        <br/>
+                        <p><strong>Form-Data</strong></p>
+                        <form onSubmit={this.handleSubmit}>
+
+                        
+                        <div className="table-responsive">
+                            <table className="table table-hover col-md-6" id="table">
+                                <thead className="thead-dark">
+                                    <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Key</th>
+                                    <th scope="col">Value</th>
+                                    <th scope="col">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr className="tableRow">
+                                    <td><input type="checkbox" name="check" className="checked" onClick={this.isChecked} /></td>
+                                    <td><input type="text" name="key" className="inputBox" onChange={this.inputText} /></td>
+                                    <td><input type="text" name="value" className="inputBox" onChange={this.inputText} /></td>
+                                    <td><input type="text" name="description" className="inputBox" onChange={this.inputText} /></td>
+                                    <td><button type="submit" className="btn btn-danger delete oi oi-trash" onClick={this.buttonDelete} /></td>
+                                    </tr>   
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="submit" className="btn btn-success offset-md-5">Send</button>
+                        </form>
+                        <button type="submit" onClick={this.buttonClick} className="offset-md-3 btn btn-success oi oi-plus btn-lg" id="button" />
+
+                        <br /> <br />
+                        <Response />
+                    </div>
                 </div>
             </div>
         );

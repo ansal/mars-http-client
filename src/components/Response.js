@@ -4,7 +4,7 @@ class Response extends React.Component {
     render() {
         return(
             <div>
-                <div className="card col-md-6">
+                <div className="card col-md-9">
                     <div className="card-body">
                         Response window.
                     </div>
