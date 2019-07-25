@@ -35,7 +35,6 @@ class ParamsComponent extends React.Component {
                         <table className="table table-hover col-md-6" id="table">
                             <thead className="thead-dark">
                                 <tr>
-                                <th scope="col"></th>
                                 <th scope="col">Key</th>
                                 <th scope="col">Value</th>
                                 <th scope="col">Description</th>
@@ -43,18 +42,14 @@ class ParamsComponent extends React.Component {
                             </thead>
                             <tbody>
                                 <tr className="paramTableRow" id="paramRowId">
-                                <td><input type="checkbox" name="check" className="checked" onClick={this.props.paramIsChecked} /></td>
-                                <td><input type="text" name="key" className="inputBox" onChange={this.props.paramInputText} /></td>
-                                <td><input type="text" name="value" className="inputBox" onChange={this.props.paramInputText} /></td>
-                                <td><input type="text" name="description" className="inputBox" onChange={this.props.paramInputText} /></td>
-                                <td><button type="submit" className="btn btn-danger delete oi oi-trash" onClick={this.props.paramButtonDelete} /></td>
+                                    <td><input type="text" name="key" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
+                                    <td><input type="text" name="value" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
+                                    <td><input type="text" name="description" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
                                 </tr>   
                             </tbody>
                         </table>
                     </div>
-                    {/* <button type="submit" className="btn btn-success offset-md-5">Send</button> */}
                     </form>
-                    <button type="submit" onClick={this.props.paramButtonClick} className="offset-md-3 btn btn-success oi oi-plus btn-lg" id="button" />
                 </div>
             </div>
         );
