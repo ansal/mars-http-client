@@ -18,7 +18,13 @@ class RequestComponent extends React.Component {
             
             method: "GET",
             url: "",
-            params: [],
+            params: [
+                {
+                    key: "",
+                    value: "",
+                    description: ""
+                }
+            ],
             headers: [],
             formData: [],
             jsonBody: "",
@@ -26,6 +32,10 @@ class RequestComponent extends React.Component {
         }
 
         this.updateRequestType = this.updateRequestType.bind(this);
+
+        // Params related
+        this.addParamsRow = this.addParamsRow.bind(this);
+        this.removeParamsRow = this.removeParamsRow.bind(this);
 
 
 
@@ -54,7 +64,26 @@ class RequestComponent extends React.Component {
         this.setState({method: event.target.value});
     }
 
-    //Params Functions
+    // Params Functions New
+
+    addParamsRow() {
+        console.log("CALED")
+        let params = this.state.params.slice();
+        params.push({
+            key: "",
+            value: "",
+            description: ""
+        });
+        this.setState({params: params}, ()=> {console.log(this.state)});
+    }
+
+    removeParamsRow(index) {
+        let params = this.state.params.slice();
+        params.splice(index, 1);
+        this.setState({params: params}, ()=> {console.log(this.state)});
+    }
+
+    //Params Functions Old
 
     paramInputOnChange(event) {
 
@@ -187,13 +216,15 @@ class RequestComponent extends React.Component {
                     </li>
                 </ul>
                 <div className="tab-content" id="myTabContent">
-                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><Params
-                    paramButtonClick={this.paramButtonClick}
-                    paramButtonDelete={this.paramButtonDelete}
-                    paramHandleSubmit={this.paramHandleSubmit}
-                    paramInputOnChange={this.paramInputOnChange}
-                    paramIsChecked={this.paramIsChecked}
-                    /></div>
+                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                        <Params 
+                            params={this.state.params} 
+                            addParamsRow={this.addParamsRow}
+                            removeParamsRow={this.removeParamsRow}
+                        />
+
+                    </div>
 
                     <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><Headers 
                     headerButtonClick={this.headerButtonClick}

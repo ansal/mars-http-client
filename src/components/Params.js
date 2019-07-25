@@ -6,21 +6,12 @@ import {stateMapper} from '../store/store.js';
 class ParamsComponent extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            params: [
-                {
-                key: "",
-                value: "",
-                description: ""
-                }
-            ]
-        };
-
-        
+        this.deleteClicked = this.deleteClicked.bind(this);
     }
 
-    
+    deleteClicked(event) {
+        this.props.removeParamsRow(0);
+    }
 
     render() {
         return(
@@ -28,9 +19,6 @@ class ParamsComponent extends React.Component {
                 <div>
                     <br />
                     <p><strong>Query Params</strong></p>
-                    <form onSubmit={this.props.paramHandleSubmit}>
-
-                    
                     <div className="table-responsive">
                         <table className="table table-hover col-md-6" id="table">
                             <thead className="thead-dark">
@@ -42,19 +30,24 @@ class ParamsComponent extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="paramTableRow" id="paramRowId">
-                                    <td><input type="text" name="key" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
-                                    <td><input type="text" name="value" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
-                                    <td><input type="text" name="description" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
-                                    <td>
-                                        <button className="btn btn-danger btn-sm">X</button>
-                                    </td>
-                                </tr>   
+                                {
+                                    this.props.params.map((p, i) => {
+                                        return (
+                                            <tr key={i} className="paramTableRow" id="paramRowId">
+                                                <td><input type="text" name="key" className="inputBox" /></td>
+                                                <td><input type="text" name="value" className="inputBox" /></td>
+                                                <td><input type="text" name="description" className="inputBox" /></td>
+                                                <td>
+                                                    <button onClick={this.deleteClicked} className="btn btn-danger btn-sm">X</button>
+                                                </td>
+                                            </tr>   
+                                        );
+                                    })
+                                }
                             </tbody>
                         </table>
-                        <button className="btn btn-success btn-sm">Add Row</button>
+                        <button onClick={this.props.addParamsRow} className="btn btn-success btn-sm">Add Row</button>
                     </div>
-                    </form>
                 </div>
             </div>
         );
