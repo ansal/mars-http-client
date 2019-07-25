@@ -36,7 +36,7 @@ class RequestComponent extends React.Component {
         // Params related
         this.addParamsRow = this.addParamsRow.bind(this);
         this.removeParamsRow = this.removeParamsRow.bind(this);
-
+        this.updateParams = this.updateParams.bind(this);
 
 
         // Old handlers
@@ -67,20 +67,25 @@ class RequestComponent extends React.Component {
     // Params Functions New
 
     addParamsRow() {
-        console.log("CALED")
         let params = this.state.params.slice();
         params.push({
             key: "",
             value: "",
             description: ""
         });
-        this.setState({params: params}, ()=> {console.log(this.state)});
+        this.setState({params: params});
     }
 
     removeParamsRow(index) {
         let params = this.state.params.slice();
         params.splice(index, 1);
         this.setState({params: params}, ()=> {console.log(this.state)});
+    }
+
+    updateParams(index, name, value) {
+        let params = this.state.params.slice();
+        params[index][name] = value;
+        this.setState({params: params});
     }
 
     //Params Functions Old
@@ -222,6 +227,7 @@ class RequestComponent extends React.Component {
                             params={this.state.params} 
                             addParamsRow={this.addParamsRow}
                             removeParamsRow={this.removeParamsRow}
+                            updateParams={this.updateParams}
                         />
 
                     </div>
