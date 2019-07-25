@@ -33,8 +33,6 @@ class App extends React.Component{
 
                     <div className="col-md-9">
                         <Request />
-                        <br/>
-                        <Route path="/" exact={true} component={Params} />
                         <br />
                         <Response />
                     </div>

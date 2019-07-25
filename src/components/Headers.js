@@ -126,28 +126,18 @@ class HeadersComponent extends React.Component {
 
         return(
             <div>
-                
-                <div className="row">
-                    <div className="col-md-12">
-                        <Menu />
-                    </div>
-                </div>
-
-                <br />
 
                 <div className="row">
-                    <div className="col-md-3">
-                        <SideNav />
-                    </div> 
+
                     <div className="col-md-9">
-                        <Request />
+                        
                         <br/>
                         <p><strong>Headers</strong></p>
                         <form onSubmit={this.props.headerHandleSubmit}>
 
                         
                         <div className="table-responsive">
-                            <table className="table table-hover col-md-6" id="table">
+                            <table className="table table-hover col-md-6" id="headerTable">
                                 <thead className="thead-dark">
                                     <tr>
                                     <th scope="col"></th>
@@ -158,22 +148,21 @@ class HeadersComponent extends React.Component {
                                 </thead>
                                 <tbody>
                                     <tr className="tableRow">
-                                    <td><input type="checkbox" name="check" className="checked" onClick={this.props.headerIsChecked} /></td>
-                                    <td><input type="text" name="key" className="inputBox" onChange={this.props.headerInputText} /></td>
-                                    <td><input type="text" name="value" className="inputBox" onChange={this.props.headerInputText} /></td>
-                                    <td><input type="text" name="description" className="inputBox" onChange={this.props.headerInputText} /></td>
-                                    <td><button type="submit" className="btn btn-danger delete oi oi-trash" onClick={this.props.headerButtonDelete} /></td>
+                                    <td><input type="checkbox" name="check" className="headerChecked" onClick={this.props.headerIsChecked} /></td>
+                                    <td><input type="text" name="key" className="headerInputBox" onChange={this.props.headerInputText} /></td>
+                                    <td><input type="text" name="value" className="headerInputBox" onChange={this.props.headerInputText} /></td>
+                                    <td><input type="text" name="description" className="headerInputBox" onChange={this.props.headerInputText} /></td>
+                                    <td><button type="submit" className="btn btn-danger headerDelete oi oi-trash" onClick={this.props.headerButtonDelete} /></td>
                                     </tr>   
                                 </tbody>
                             </table>
                         </div>
-                        <button type="submit" className="btn btn-success offset-md-5">Send</button>
+                        {/* <button type="submit" className="btn btn-success offset-md-5">Send</button> */}
                         </form>
                         <button type="submit" onClick={this.props.headerButtonClick} className="offset-md-3 btn btn-success oi oi-plus btn-lg" id="button" />
-                        <button type="submit" onClick={this.propsCheck} className="offset-md-3 btn btn-danger oi oi-plus btn-lg" id="button" />
+                        {/* <button type="submit" onClick={this.propsCheck} className="offset-md-3 btn btn-danger oi oi-plus btn-lg" id="button" /> */}
 
-                        <br /> <br />
-                        <Response />
+                     
                     </div>
                 </div>
                 
