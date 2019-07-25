@@ -38,6 +38,7 @@ class ParamsComponent extends React.Component {
                                 <th scope="col">Key</th>
                                 <th scope="col">Value</th>
                                 <th scope="col">Description</th>
+                                <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,9 +46,13 @@ class ParamsComponent extends React.Component {
                                     <td><input type="text" name="key" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
                                     <td><input type="text" name="value" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
                                     <td><input type="text" name="description" className="inputBox" onChange={this.props.paramInputOnChange} /></td>
+                                    <td>
+                                        <button className="btn btn-danger btn-sm">X</button>
+                                    </td>
                                 </tr>   
                             </tbody>
                         </table>
+                        <button className="btn btn-success btn-sm">Add Row</button>
                     </div>
                     </form>
                 </div>
