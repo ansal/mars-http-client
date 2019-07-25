@@ -43,6 +43,12 @@ class RequestComponent extends React.Component {
             send: false
         }
 
+        this.updateRequestType = this.updateRequestType.bind(this);
+
+
+
+        // Old handlers
+
         this.inputText = this.inputText.bind(this);
         // this.selectRequest = this.selectRequest.bind(this);
         // this.buttonClicked = this.buttonClicked.bind(this);
@@ -66,6 +72,10 @@ class RequestComponent extends React.Component {
         this.paramHandleSubmit = this.paramHandleSubmit.bind(this);
         this.paramInputText = this.paramInputText.bind(this);
         this.paramIsChecked = this.paramIsChecked.bind(this);
+    }
+
+    updateRequestType(event) {
+        this.setState({method: event.target.value});
     }
 
     //Params Functions
@@ -393,7 +403,7 @@ class RequestComponent extends React.Component {
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="form-group row col-md-12">
-                        <select name="type" onChange={this.inputText} className="form-control col-md-1 bg-dark text-white">
+                        <select name="type" onChange={this.updateRequestType} className="form-control col-md-1 bg-dark text-white">
                             <option value="GET">GET</option>
                             <option value="POST">POST</option>
                             <option value="PUT">PUT</option>
@@ -450,25 +460,25 @@ class RequestComponent extends React.Component {
                 </nav> */}
 
 
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Params</a>
+                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                    <li className="nav-item">
+                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Params</a>
                     </li>
 
-                    <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Headers</a>
+                    <li className="nav-item">
+                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Headers</a>
                     </li>
 
-                    <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Form-Data</a>
+                    <li className="nav-item">
+                    <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Form-Data</a>
                     </li>
 
-                    <li class="nav-item">
-                    <a class="nav-link" id="json-tab" data-toggle="tab" href="#json" role="tab" aria-controls="json" aria-selected="false">JSON</a>
+                    <li className="nav-item">
+                    <a className="nav-link" id="json-tab" data-toggle="tab" href="#json" role="tab" aria-controls="json" aria-selected="false">JSON</a>
                     </li>
                 </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><Params
+                <div className="tab-content" id="myTabContent">
+                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><Params
                     paramButtonClick={this.paramButtonClick}
                     paramButtonDelete={this.paramButtonDelete}
                     paramHandleSubmit={this.paramHandleSubmit}
@@ -476,18 +486,18 @@ class RequestComponent extends React.Component {
                     paramIsChecked={this.paramIsChecked}
                     /></div>
 
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><Headers 
+                    <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><Headers 
                     headerButtonClick={this.headerButtonClick}
                     headerButtonDelete={this.headerButtonDelete}
                     headerHandleSubmit={this.headerHandleSubmit}
                     headerInputText={this.headerInputText}
                     headerIsChecked={this.headerIsChecked} /></div>
 
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><FormData
+                    <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><FormData
                     
                     /></div>
 
-                    <div class="tab-pane fade" id="json" role="tabpanel" aria-labelledby="json-tab"><Json /></div>
+                    <div className="tab-pane fade" id="json" role="tabpanel" aria-labelledby="json-tab"><Json /></div>
                 </div>
                 
             </div>
