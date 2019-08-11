@@ -5,12 +5,14 @@ import "../../node_modules/highlight.js/styles/solarized-light.css";
 import Highlight from "react-highlight";
 
 class ResponseComponent extends React.Component {
+  
   render() {
     if (this.props.response) {
+      console.log(this.props.response.message);
       var jsonString = this.props.response;
-      var jsonPretty = JSON.stringify(JSON.parse(jsonString), null, 2);
+      var jsonPretty = JSON.stringify(jsonString, null, 2);
     } else {
-      var jsonPretty = "skylark";
+      var jsonPretty = "";
     }
 
     if (!jsonPretty) {

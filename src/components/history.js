@@ -9,57 +9,23 @@ class HistoryCollectionComponents extends React.Component {
     super(props);
 
     this.state = {
-      // type: "",
       name: "",
       description: "",
       id: "id"
     }
-    // this.handleClick = this.handleClick.bind(this);
-    // this.showCollection = this.showCollection.bind(this);
-
-    // this.deleteModal = React.createRef();
-    // this.showModal = React.createRef();
   }
 
-  // showCollection(props) {
-  //   console.log(props);
-  //   let $ = window.$;
-  //   let showModal = this.showModal.current;
-  //   $(showModal).modal();
-
-  //   this.props.dispatch({
-  //     type: "FETCH_COLLECTION",
-  //     name: "collection" 
-  //   })
-  // }
-
-  // componentWillMount() {
-  //   this.props.dispatch({
-  //     type: "COLLECTION_FETCHED",
-  //     name: "collection"
-  //   })
-  // }
 
   render() {
     let self = this;
 
     function HistoryCollectionList(props) {
-      // console.log(props);
-      const sidebar = (
-        <ul>
-          {props.posts.map((post) =>
-            <li key={post.id}>
-            </li>
-          )}
-        </ul>
-      );
       const content = props.posts.map((post) =>
         <div key={props.id}>
           <br />
-          <p><strong>{post.type}</strong></p>
+          <p><strong>{post.method}</strong> - <i>{post.url}</i></p>
           
-          
-              {post.url}
+              {post.date}
             
           <HistoryButtonDelete postData={post}/>
 
@@ -84,8 +50,6 @@ class HistoryCollectionComponents extends React.Component {
       
           <div>
             <div className="card">
-              {/* <h3> List Collections </h3>
-              <hr /> */}
               <div ref={this.deleteModal} className="modal" tabIndex="-1" role="dialog">
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">

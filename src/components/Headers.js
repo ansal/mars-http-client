@@ -10,56 +10,60 @@ import SideNav from './SideNav.js';
 class HeadersComponent extends React.Component {
     constructor(props) {
         super(props);
+        this.deleteClicked = this.deleteClicked.bind(this);
+        this.inputChanged = this.inputChanged.bind(this);
+    }
 
-        this.state = {
-            headers: [
-                {
-                key: "",
-                value: "",
-                description: ""
-                }
-            ]
-        };
+    deleteClicked(event) {
+        this.props.removeHeadersRow(0);
+    }
+
+    inputChanged(event) {
+        let name = event.target.name,
+            index = parseInt(event.target.getAttribute("data-index")),
+            value = event.target.value;
+
+        this.props.updateHeaders(index, name, value);
     }
 
     render() {
 
         return(
             <div>
-
-                <div className="row">
-
-                    <div className="col-md-9">
-                        
-                        <br/>
-                        <p><strong>Headers</strong></p>
-                        <form onSubmit={this.props.headerHandleSubmit}>
-
-                        
-                        <div className="table-responsive">
-                            <table className="table table-hover col-md-6" id="headerTable">
-                                <thead className="thead-dark">
-                                    <tr>
-                                    <th scope="col">Key</th>
-                                    <th scope="col">Value</th>
-                                    <th scope="col">Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr className="tableRow">
-                                        <td><input type="text" name="key" className="headerInputBox" onChange={this.props.headerInputOnChange} /></td>
-                                        <td><input type="text" name="value" className="headerInputBox" onChange={this.props.headerInputOnChange} /></td>
-                                        <td><input type="text" name="description" className="headerInputBox" onChange={this.props.headerInputOnChange} /></td>
-                                    </tr>   
-                                </tbody>
-                            </table>
-                        </div>
-                        </form>
-                     
+                <div>
+                    <br />
+                    <p><strong>Headers</strong></p>
+                    <div className="table-responsive">
+                        <table className="table table-hover col-md-9" id="table">
+                            <thead className="thead-dark">
+                                <tr>
+                                <th scope="col">Key</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">Description</th>
+                                <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.props.headers.map((h, i) => {
+                                        return (
+                                            <tr key={i} className="headerTableRow" id="headerRowId">
+                                                <td><input data-index={i} onChange={this.inputChanged} type="text" name="key" className="inputBox" /></td>
+                                                <td><input data-index={i} onChange={this.inputChanged} type="text" name="value" className="inputBox" /></td>
+                                                <td><input data-index={i} onChange={this.inputChanged} type="text" name="description" className="inputBox" /></td>
+                                                <td>
+                                                    <button onClick={this.deleteClicked} className="btn btn-danger btn-sm"><span class="oi oi-trash"></span></button>
+                                                </td>
+                                            </tr>   
+                                        );
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                        <button onClick={this.props.addHeadersRow} className="btn btn-success btn-sm offset-md-4"><span class="oi oi-plus"></span></button>
                     </div>
                 </div>
-                
-            </div>
+                </div>  
         );
     }
 }

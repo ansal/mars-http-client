@@ -8,8 +8,6 @@ class PostComponents extends react.Component {
                 <div className="d-flex flex-row bd-highlight mb-1">
                    
                 <ul>
-                    
-                    {/* id ={this.props.id} */}
 
                     {this.props.body}
 

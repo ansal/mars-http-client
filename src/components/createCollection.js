@@ -1,9 +1,6 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { stateMapper } from '../store/store.js';
-
-import Menu from './Menu.js';
 
 class CreateCollectionComponent extends React.Component {
     constructor(props) {
@@ -19,32 +16,20 @@ class CreateCollectionComponent extends React.Component {
                 isDescriptionValid: true,
             },
 
-            url: {
+            url: [{
                 type: "",
                 url: ""
-            }
+            }]
         }
 
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.buttonClicked = this.buttonClicked.bind(this);
-
-        // this.modal = React.createRef();
     }
 
-    // buttonClicked() {
-    //     let $ = window.$;
-    //     let modal = this.modal.current;
-    //     $(modal).modal();
-    // }
-
     onChange(event) {
-        //let name = event.target.name : can use both ways, variable or direct.
-
         this.setState({
             [event.target.name]: event.target.value,
         })
-
     }
 
     validateform() {
@@ -148,8 +133,7 @@ class CreateCollectionComponent extends React.Component {
                                                 <button onClick={this.props.saveChanges} type="submit" className="btn btn-success" > Create </button>
 
                                             </form>
-
-
+                                            
                                         </div>
                                     </div>
                                 </div>

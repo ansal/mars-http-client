@@ -18,23 +18,15 @@ class ButtonDeleteComponent extends React.Component {
     
         this.props.dispatch({
           type: "DELETE_COLLECTION",
-        //   newCollection: this.props.postData,
           name:"collection",
           id: this.props.postData.id
         })
     }
 
-    // componentWillMount() {
-    //     this.props.dispatch({
-    //       type: "COLLECTION_FETCHED",
-    //       name: "collection"
-    //     })
-    //   }
-
     render() {
         return(
             <div>
-                <button type="button" className="btn btn-danger" onClick={this.handleClick}><span class="oi oi-trash"></span></button>
+                <button type="button" className="btn btn-danger btn-sm" onClick={this.handleClick}><span class="oi oi-trash"></span></button>
             </div>
         );
     }

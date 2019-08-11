@@ -1,4 +1,3 @@
-
 function isUrlLoadingReducer(isUrlLoading = false, action) {
     if (action.type === "FETCH_URL") {
         return true;

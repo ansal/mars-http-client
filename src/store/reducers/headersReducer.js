@@ -1,8 +1,9 @@
-import {store} from '../store.js';
+import {fetchUrlData} from '../api.js';
 
 function headersReducer(headers = [], action) {
     
     if(action.type === "HEADERS"){
+        fetchUrlData();
         return action.requestData;
     }
 

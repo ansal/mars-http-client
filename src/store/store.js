@@ -2,18 +2,15 @@ import { createStore } from "redux";
 import { combineReducers } from "redux";
 
 import requestReducer from "./reducers/requestReducer.js";
-import paramsReducer from "./reducers/paramsReducer.js";
-import headersReducer from "./reducers/headersReducer.js";
-import bodyReducer from "./reducers/bodyReducer.js";
 import collectionReducer from "./reducers/collectionReducer.js";
 import historyReducer from "./reducers/historyReducer.js";
-import isUrlLoadingReducer from "./reducers/isUrlLoadingReducer.js";
+import responseReducer from "./reducers/responseReducer.js";
 
 let reducer = combineReducers({
     request: requestReducer,
-    // collections: collectionReducer,
-    // history: historyReducer,
-    // isUrlLoading: isUrlLoadingReducer
+    collections: collectionReducer,
+    history: historyReducer,
+    response: responseReducer
 })
 
 let store = createStore(reducer);

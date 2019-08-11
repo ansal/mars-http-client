@@ -11,28 +11,25 @@ class SaveToCollectionComponent extends React.Component {
 
         this.state = {
             name: "",
-            data: {}
+            data: [{
+                method: "",
+                url: ""
+            }]
         }
 
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.buttonClicked = this.buttonClicked.bind(this);
-
-        // this.modal = React.createRef();
     }
 
-    // buttonClicked() {
-    //     let $ = window.$;
-    //     let modal = this.modal.current;
-    //     $(modal).modal();
-    // }
-
     onChange(event) {
-        //let name = event.target.name : can use both ways, variable or direct.
-
+        console.log(this.props);
         this.setState({
             [event.target.name]: event.target.value,
-            data: this.props.request
+            data: {
+                url: this.props.request.url,
+                method: this.props.request.method
+            }
+
         })
 
     }
@@ -41,11 +38,6 @@ class SaveToCollectionComponent extends React.Component {
         console.log(this.props.request.url);
         event.preventDefault();
 
-        // this.props.dispatch({
-        //     type: "SAVE_TO_COLLECTION",
-        //     formData: this.state
-        // })
-
         var collection = JSON.parse(localStorage.collection);
 
         for(var i=0; i<collection.length; i++) {
@@ -53,11 +45,12 @@ class SaveToCollectionComponent extends React.Component {
 
             if(collection[i]["name"] === this.state.name) {
                 this.props.dispatch({
-                    type: "EDIT_COLLECTION",
-                    name: collection[i]["name"], //name: this.state.name
+                    type: "SAVE_TO_COLLECTION",
+                    name: collection[i]["name"],
                     id: collection[i]["id"],
                     description: collection[i]["description"],
-                    url: this.state.data
+                    url: this.state.data.url,
+                    method: this.state.data.method
                 });
             }
         }

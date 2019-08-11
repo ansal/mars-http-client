@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {stateMapper} from '../store/store.js';
 
@@ -29,7 +28,7 @@ class ParamsComponent extends React.Component {
                     <br />
                     <p><strong>Query Params</strong></p>
                     <div className="table-responsive">
-                        <table className="table table-hover col-md-6" id="table">
+                        <table className="table table-hover col-md-9" id="table">
                             <thead className="thead-dark">
                                 <tr>
                                 <th scope="col">Key</th>
@@ -47,7 +46,7 @@ class ParamsComponent extends React.Component {
                                                 <td><input data-index={i} onChange={this.inputChanged} type="text" name="value" className="inputBox" /></td>
                                                 <td><input data-index={i} onChange={this.inputChanged} type="text" name="description" className="inputBox" /></td>
                                                 <td>
-                                                    <button onClick={this.deleteClicked} className="btn btn-danger btn-sm">X</button>
+                                                    <button onClick={this.deleteClicked} className="btn btn-danger btn-sm"><span class="oi oi-trash"></span></button>
                                                 </td>
                                             </tr>   
                                         );
@@ -55,7 +54,7 @@ class ParamsComponent extends React.Component {
                                 }
                             </tbody>
                         </table>
-                        <button onClick={this.props.addParamsRow} className="btn btn-success btn-sm">Add Row</button>
+                        <button onClick={this.props.addParamsRow} className="btn btn-success btn-sm offset-md-4"><span class="oi oi-plus"></span></button>
                     </div>
                 </div>
             </div>

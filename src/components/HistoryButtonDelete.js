@@ -13,18 +13,10 @@ class ButtonDeleteComponent extends React.Component {
     handleClick() {
         this.props.dispatch({
           type: "DELETE_HISTORY",
-        //   newCollection: this.props.postData,
           name:"fetchHistory",
           id: this.props.postData.id
         })
     }
-
-    // componentWillMount() {
-    //     this.props.dispatch({
-    //       type: "COLLECTION_FETCHED",
-    //       name: "collection"
-    //     })
-    //   }
 
     render() {
         return(

@@ -19,20 +19,9 @@ class EditCollectionComponent extends React.Component {
         }
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.buttonClicked = this.buttonClicked.bind(this);
-
-        // this.modal = React.createRef();   
     }
 
-    // buttonClicked() {
-    //     let $ = window.$;
-    //     let modal = this.modal.current;
-    //     $(modal).modal();
-    // }
-
     onChange(event) {
-        //let name = event.target.name : can use both ways, variable or direct.
-
         this.setState({
             [event.target.name]: event.target.value,
             data: this.props.request
@@ -76,7 +65,7 @@ class EditCollectionComponent extends React.Component {
 
         this.props.dispatch({
             type: "EDIT_COLLECTION",
-            name: this.state.name, //name: this.state.name
+            name: this.state.name,
             id: this.props.posts.id,
             description: this.state.description,
             url: this.state.data
@@ -151,9 +140,6 @@ class EditCollectionComponent extends React.Component {
                                 </div>
                             </div>
                         </div>
-
-                        {/* <p ref={this.msg}> Edit Collection</p>
-                        <button onClick={this.buttonClicked}> Edit Collection </button> */}
 
                     </div>
                 </div>

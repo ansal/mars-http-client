@@ -12,7 +12,6 @@ class ListCollectionsComponent extends React.Component {
     super(props);
 
     this.state = {
-      // type: "",
       name: "",
       description: "",
       id: "id",
@@ -21,31 +20,7 @@ class ListCollectionsComponent extends React.Component {
         url: ""
       }
     }
-    // this.handleClick = this.handleClick.bind(this);
-    // this.showCollection = this.showCollection.bind(this);
-
-    // this.deleteModal = React.createRef();
-    // this.showModal = React.createRef();
   }
-
-  // showCollection(props) {
-  //   console.log(props);
-  //   let $ = window.$;
-  //   let showModal = this.showModal.current;
-  //   $(showModal).modal();
-
-  //   this.props.dispatch({
-  //     type: "FETCH_COLLECTION",
-  //     name: "collection" 
-  //   })
-  // }
-
-  // componentWillMount() {
-  //   this.props.dispatch({
-  //     type: "COLLECTION_FETCHED",
-  //     name: "collection"
-  //   })
-  // }
 
   render() {
     let self = this;
@@ -58,16 +33,6 @@ class ListCollectionsComponent extends React.Component {
     }
 
     function CollectionList(props) {
-      // console.log(props);
-      
-      // const sidebar = (
-      //   <ul>
-      //     {props.posts.map((post) =>
-      //       <li key={post.id}>
-      //       </li>
-      //     )}
-      //   </ul>
-      // );
 
       const content = props.posts.map((post) =>
       
@@ -76,14 +41,6 @@ class ListCollectionsComponent extends React.Component {
           <p><strong>Name</strong> - {post.name}</p>
           
           <p><strong>Description</strong> - {post.description}</p>
-            
-          <p><strong>{post.url.type}</strong> - {post.url.url}</p>
-
-          {/* <ul>
-            <li key={post.id}>
-              {post.description}
-            </li>
-          </ul> */}
         
           <div className="row offset-md-1">
           <ButtonEdit postData={post} />   
@@ -103,21 +60,10 @@ class ListCollectionsComponent extends React.Component {
       );
     }
 
-    // const posts = JSON.parse(localStorage.collection);
-    // let posts;
-    // if(localStorage.collection) {
-    //   posts = JSON.parse(localStorage.collection);
-    // } else {
-    //   posts = [];
-    // }
-    
-
     return (
       
           <div>
             <div className="card">
-              {/* <h3> List Collections </h3>
-              <hr /> */}
               <div ref={this.deleteModal} className="modal" tabIndex="-1" role="dialog">
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">

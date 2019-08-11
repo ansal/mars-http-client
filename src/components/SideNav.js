@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 import ListCollections from './listCollections.js';
 import HistoryComponents from './history.js';

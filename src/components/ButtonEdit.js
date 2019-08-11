@@ -20,12 +20,6 @@ class ButtonEditComponent extends React.Component {
         let modal = this.modal.current;
         $(modal).modal();
         console.log(this.props);
-        // this.props.dispatch({
-        //     type: "EDIT_COLLECTION",
-        //   //   newCollection: this.props.postData,
-        //     name:"collection",
-        //     id: this.props.postData.id
-        // })
     }
 
     saveChanges() {
@@ -34,18 +28,11 @@ class ButtonEditComponent extends React.Component {
         $(modal).modal("hide");
     }
 
-    // componentWillMount() {
-    //     this.props.dispatch({
-    //       type: "COLLECTION_FETCHED",
-    //       name: "collection"
-    //     })
-    //   }
-
     render() {
         return(
             <div>
                 <EditCollection modal={this.modal} saveChanges={this.saveChanges} posts={this.props.postData}/>
-                <button type="button" className="btn btn-success" onClick={this.buttonClick}><span class="oi oi-wrench"></span></button>
+                <button type="button" className="btn btn-success btn-sm" onClick={this.buttonClick}><span class="oi oi-wrench"></span></button>
             </div>
         );
     }
