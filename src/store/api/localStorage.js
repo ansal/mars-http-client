@@ -1,3 +1,5 @@
+var moment = require("moment");
+
 function createItem(name, object) {
     let storage = localStorage.getItem(name);
     let data = [];
@@ -5,7 +7,7 @@ function createItem(name, object) {
         data = JSON.parse(storage);
     }
 
-    object.id = name + Math.random() + new Date();
+    object.id = name + Math.random() + moment().format("MMM Do YY");
 
     data.push(object);
     data = JSON.stringify(data);
@@ -16,24 +18,18 @@ function createItem(name, object) {
 }
 
 function getAllItems(name) {
-    // Need name argument
-    // Read data from storage, parse it and return. Like line number 2 and 3 above
     let storage = localStorage.getItem(name);
     let items = JSON.parse(storage);
-    // let items = {...localStorage};
     return items;
 }
 
 function getOneItem(name, id) {
-    // First get all items and do a loop to find out the one with id passed
-    // Arguments needed are name and id
     let items = getAllItems(name);
     let item;
 
     for(var i=0; i<items.length; i++) {
         if(items[i].id === id) {
             item = items[i];
-            // item = localStorage.getItem(items[i]);
         }
     }
 
@@ -41,14 +37,10 @@ function getOneItem(name, id) {
 }
 
 function removeAllItems(name) {
-    // Argument should be name
-    // localstorage.set item (name, "[]")
     return localStorage.setItem(name, "[]");
 }
 
 function removeOneItem(name, id) {
-    // Arguments name, id
-    // retrieve all the items, parse, remove the item with id from array, stringiy and set in localstorage
     let items = getAllItems(name);
 
     for(var i=0; i<items.length; i++) {
@@ -70,4 +62,16 @@ function editItem(name, id, newData) {
     return localStorage.setItem(name, JSON.stringify(items));
 }
 
-export {createItem, getAllItems, getOneItem, removeAllItems, removeOneItem, editItem};
+function saveItem(name, id, newData) {
+    let items = getAllItems(name);
+
+    for(var i=0; i<items.length; i++) {
+        if(items[i].id === id) {
+            items[i].url.type = newData.id;
+            items[i].url.url = newData.url;
+        }
+    }
+    return localStorage.setItem(name, JSON.stringify(items));
+}
+
+export {createItem, getAllItems, getOneItem, removeAllItems, removeOneItem, editItem, saveItem};

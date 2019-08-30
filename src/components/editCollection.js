@@ -8,8 +8,8 @@ class EditCollectionComponent extends React.Component {
 
         this.state = {
             name: "",
-            type: "",
             description: "",
+            data: {},
 
             formState: {
                 isFormValid: true,
@@ -19,22 +19,12 @@ class EditCollectionComponent extends React.Component {
         }
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.buttonClicked = this.buttonClicked.bind(this);
-
-        this.modal = React.createRef();   
-    }
-
-    buttonClicked() {
-        let $ = window.$;
-        let modal = this.modal.current;
-        $(modal).modal();
     }
 
     onChange(event) {
-        //let name = event.target.name : can use both ways, variable or direct.
-
         this.setState({
             [event.target.name]: event.target.value,
+            data: this.props.request
         })
 
     }
@@ -67,10 +57,20 @@ class EditCollectionComponent extends React.Component {
         event.preventDefault();
         if (!this.validateform()) { return; }
 
+        console.log(this.props);
+
+        var collection = JSON.parse(localStorage.collection);
+
+        console.log(this.props.posts.id);
+
         this.props.dispatch({
             type: "EDIT_COLLECTION",
-            formData: this.state
-        })
+            name: this.state.name,
+            id: this.props.posts.id,
+            description: this.state.description,
+            url: this.state.data
+        });
+             
     }
 
     render() {
@@ -82,7 +82,7 @@ class EditCollectionComponent extends React.Component {
                 <div className="row">
                     <div className="col-md-4 offset-md-4">
 
-                        <div ref={this.modal} className="modal" tabIndex="-1" role="dialog">
+                        <div ref={this.props.modal} className="modal" tabIndex="-1" role="dialog">
                             <div className="modal-dialog" role="document">
                                 <div className="modal-content">
                                     <div className="modal-header">
@@ -94,8 +94,6 @@ class EditCollectionComponent extends React.Component {
                                     <div className="modal-body">
                                         <div>
 
-                                            <h2>Edit Collection</h2>
-                                            <hr />
                                             {
                                                 !this.state.formState.isFormValid &&
                                                 <div className="alert alert-danger">Please fill in all the fields and try again </div>
@@ -131,24 +129,17 @@ class EditCollectionComponent extends React.Component {
 
                                                     </label>
                                                 </div>
-                                                <button style={{ marginRight: 16 }} type="submit" className="btn btn-secondary"> Cancel </button>
-                                                <button type="submit" className="btn btn-success"> Edit </button>
+                                                <button style={{ marginRight: 16 }} type="reset" className="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+                                                <button type="submit" className="btn btn-success" onClick={this.props.saveChanges}> Edit </button>
 
                                             </form>
 
 
                                         </div>
                                     </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-primary">Save changes</button>
-                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <p ref={this.msg}> Edit Collection</p>
-                        <button onClick={this.buttonClicked}> Edit Collection </button>
 
                     </div>
                 </div>

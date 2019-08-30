@@ -1,101 +1,105 @@
 import React from 'react';
-import PostComponents from './post.js'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-class HistoryComponents extends React.Component {
-  state = {
-    postArray: [
-      { id: 1, body: <a href="#">http://postman/history.js</a> },
-      { id: 2, body: <a href="#">http://postman/history.js</a> },
-      { id: 3, body: <a href="#">http://postman/history.js</a> }
-    ]
-  }
-  deleteEvent = (index) => {
-    const copyPostArray = Object.assign([], this.state.postArray);
-    copyPostArray.splice(index, 1);
-    this.setState(
-      {
-        postArray: copyPostArray
-      }
-    )
+import { connect } from "react-redux";
+import { stateMapper } from '../store/store.js';
 
+import HistoryButtonDelete from './HistoryButtonDelete.js';
+
+class HistoryCollectionComponents extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: "",
+      description: "",
+      id: "id"
+    }
   }
+
 
   render() {
+    let self = this;
 
+    function HistoryCollectionList(props) {
+      const content = props.posts.map((post) =>
+        <div key={props.id}>
+          <br />
+          <p><strong>{post.method}</strong> - <i>{post.url}</i></p>
+          
+              {post.date}
+            
+          <HistoryButtonDelete postData={post}/>
+
+        </div>
+      );
+      return (
+        <div>
+          {content}
+        </div>
+      );
+    }
+
+    let posts;
+
+    if(localStorage.fetchHistory) {
+      posts = JSON.parse(localStorage.fetchHistory)
+    } else {
+      posts = [];
+    }
 
     return (
-      < div className="container-fluid">
-        <div className="row">
-          <div className="col-md-3">
-            <div className="card text-center">
-              <div className="card-header">
-                <ul className="nav nav-pills card-header-pills">
-                  <li className="nav-item">
-                    <a className="nav-link " href="#">History</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">Collection</a>
-                  </li>
-                </ul>
-              </div>
-              <div className="card-body">
-                <button type="button" className=" btn btn-secondary">new collection</button>
-                <button type="button" className="btn btn-secondary  offset-md-1"  >trash</button>
-
-              </div>
-              <hr />
-              <div>
-
-                <div className="nav-item dropdown d-flex justify-content-start">
-                  <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">today</a>
-                </div>
-
-                <div className="">
-                  <ul >
-                    {
-                      this.state.postArray.map((post, index) => {
-
-                        return (
-                          <PostComponents
-                            // id ={post.id}
-
-                            body={post.body}
-                            delete={this.deleteEvent.bind(this, index)}
-                          />
-                        );
-                      })
-                    }
-                  </ul>
-
-
-                  <div className="nav-item dropdown d-flex justify-content-start">
-                    <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">yesterday</a>
+      
+          <div>
+            <div className="card">
+              <div ref={this.deleteModal} className="modal" tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title">Delete</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <p>Are you sure, you want to delete this Collection!!</p>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-primary" onClick={this.buttonDelete}>Ok</button>
+                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                   </div>
-
-                  <ul>
-                    {
-                      this.state.postArray.map((post, index) => {
-
-                        return (
-                          <PostComponents
-                            // id ={post.id}
-
-                            body={post.body}
-                            delete={this.deleteEvent.bind(this, index)}
-                          />
-                        );
-                      })
-                    }
-                  </ul>
-                  <br />
                 </div>
-
               </div>
+
+              <div ref={this.showModal} className="modal" tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title">Collection</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <p> Collection!!</p>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-primary">Ok</button>
+                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ul>
+                <HistoryCollectionList posts={posts} />
+             </ul>
             </div>
           </div>
-        </div>
-      </div>
-    );
+
+    )
   }
 }
+
+let HistoryComponents = connect(stateMapper)(HistoryCollectionComponents);
+
 export default HistoryComponents;

@@ -2,67 +2,55 @@ import React from 'react';
 import { connect } from "react-redux";
 import { stateMapper } from '../store/store.js';
 
+import ButtonDelete from './ButtonDelete.js';
+import EditCollection from './editCollection.js';
+import ButtonEdit from './ButtonEdit.js';
+import SaveToCollection from './SaveToCollection.js';
+
 class ListCollectionsComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      type: "",
-      id: "id"
+      name: "",
+      description: "",
+      id: "id",
+      url: {
+        type: "",
+        url: ""
+      }
     }
-    this.handleClick = this.handleClick.bind(this);
-    this.showCollection = this.showCollection.bind(this);
-
-    this.deleteModal = React.createRef();
-    this.showModal = React.createRef();
   }
 
-  showCollection(props) {
-    let $ = window.$;
-    let showModal = this.showModal.current;
-    $(showModal).modal();
-
-    this.props.dispatch({
-      type: "FETCH_COLLECTION",
-      id: "id"
-    })
-  }
-
-  handleClick(props) {
-
-    let $ = window.$;
-    let deleteModal = this.deleteModal.current;
-    $(deleteModal).modal();
-
-    this.props.dispatch({
-      type: "DELETE_COLLECTION",
-      id: "id"
-    })
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch({
-      type: "COLLECTION_DELETED"
-    })
-  }
   render() {
     let self = this;
 
-    function CollectionList(props) {
-      const sidebar = (
-        <ul>
-          {props.posts.map((post) =>
-            <li key={post.id}>
-            </li>
-          )}
-        </ul>
-      );
-      const content = props.posts.map((post) =>
-        <div key={props.id}>
-          <p>{post.content}</p>
-          <button style={{ marginRight: 16 }} type="button" class="btn btn-success" onClick={self.showCollection}>Show Collection</button>
-          <button type="button" class="btn btn-danger" onClick={self.handleClick}>Delete</button>
+    let posts;
+    if(localStorage.collection) {
+      posts = JSON.parse(localStorage.collection);
+    } else {
+      posts = [];
+    }
 
+    function CollectionList(props) {
+
+      const content = props.posts.map((post) =>
+      
+        <div key={props.id}>
+          
+          <p><strong>Name</strong> - {post.name}</p>
+          
+          <p><strong>Description</strong> - {post.description}</p>
+        
+          <div className="row offset-md-1">
+          <ButtonEdit postData={post} />   
+          <span className="offset-md-1"> <ButtonDelete postData={post} /></span>
+          </div>
+          
+          
+          <hr className="bg bg-dark"/>
+          <SaveToCollection postData={post} />
+          <EditCollection postData={post} />
         </div>
       );
       return (
@@ -72,20 +60,10 @@ class ListCollectionsComponent extends React.Component {
       );
     }
 
-    const posts = [
-      { id: 1, content: <a href="#">Collection-1</a> },
-      { id: 2, content: <a href="#">Collection-2</a> },
-      { id: 3, content: <a href="#">Collection-3</a> },
-      { id: 4, content: <a href="#">Collection-4</a> }
-    ];
-
     return (
-      <div>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="offset-md-4 col-md-4">
-              <h3> List Collections </h3>
-              <hr />
+      
+          <div>
+            <div className="card">
               <div ref={this.deleteModal} className="modal" tabIndex="-1" role="dialog">
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">
@@ -99,7 +77,7 @@ class ListCollectionsComponent extends React.Component {
                       <p>Are you sure, you want to delete this Collection!!</p>
                     </div>
                     <div className="modal-footer">
-                      <button type="button" className="btn btn-primary">Ok</button>
+                      <button type="button" className="btn btn-primary" onClick={this.buttonDelete}>Ok</button>
                       <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
@@ -128,11 +106,9 @@ class ListCollectionsComponent extends React.Component {
 
               <ul>
                 <CollectionList posts={posts} />
-             </ul>
+              </ul>
             </div>
           </div>
-        </div>
-      </div>
 
     )
   }

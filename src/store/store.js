@@ -1,36 +1,21 @@
 import { createStore } from "redux";
 import { combineReducers } from "redux";
 
-import createCollectionReducer from "./reducers/createCollectionReducer.js";
-import importCollectionsReducer from "./reducers/importCollectionsReducer.js";
-import isUrlLoadingReducer from "./reducers/isUrlLoadingReducer.js";
-import requestResponseReducer from "./reducers/requestResponseReducer.js";
-import saveHistoryReducer from "./reducers/saveHistoryReducer.js";
-import editCollectionReducer from "./reducers/editCollectionReducer.js";
-import listCollectionReducer from "./reducers/listCollectionReducer.js";
-import createHistoryReducer from "./reducers/createHistoryReducer.js";
-import fetchHistoryReducer from "./reducers/fetchHistoryReducer.js";
-import getOneHistoryReducer from "./reducers/getOneHistoryReducer.js";
-
+import requestReducer from "./reducers/requestReducer.js";
+import collectionReducer from "./reducers/collectionReducer.js";
+import historyReducer from "./reducers/historyReducer.js";
+import responseReducer from "./reducers/responseReducer.js";
 
 let reducer = combineReducers({
-    listCollection: listCollectionReducer,
-    createCollection: createCollectionReducer,
-    editCollection: editCollectionReducer,
-    importCollections: importCollectionsReducer,
-    isUrlLoading: isUrlLoadingReducer,
-    requestResponse: requestResponseReducer,
-    saveHistory: saveHistoryReducer,
-    createHistory: createHistoryReducer,
-    fetchHistory: fetchHistoryReducer,
-    getOneHistory: getOneHistoryReducer,
-    saveHistory: saveHistoryReducer
+    request: requestReducer,
+    collections: collectionReducer,
+    history: historyReducer,
+    response: responseReducer
 })
-
 
 let store = createStore(reducer);
 
-store.subscribe(() => {
+store.subscribe(function(){
     console.log("store dispatch ==>", store.getState());
 });
 

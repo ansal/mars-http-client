@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { stateMapper } from '../store/store.js';
 
@@ -9,34 +8,28 @@ class CreateCollectionComponent extends React.Component {
 
         this.state = {
             name: "",
-            type: "",
             description: "",
 
             formState: {
                 isFormValid: true,
                 isNameValid: true,
                 isDescriptionValid: true,
-            }
+            },
+
+            url: [{
+                type: "",
+                url: ""
+            }]
         }
+
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.buttonClicked = this.buttonClicked.bind(this);
-
-        this.modal = React.createRef();
     }
 
-    buttonClicked() {
-        let $ = window.$;
-        let modal = this.modal.current;
-        $(modal).modal();
-    }
     onChange(event) {
-        //let name = event.target.name : can use both ways, variable or direct.
-
         this.setState({
             [event.target.name]: event.target.value,
         })
-
     }
 
     validateform() {
@@ -89,7 +82,7 @@ class CreateCollectionComponent extends React.Component {
                 <div className="row">
                     <div className="col-md-4 offset-md-4">
 
-                        <div ref={this.modal} className="modal" tabIndex="-1" role="dialog">
+                        <div ref={this.props.modal} className="modal" tabIndex="-1" role="dialog">
                             <div className="modal-dialog" role="document">
                                 <div className="modal-content">
                                     <div className="modal-header">
@@ -101,8 +94,6 @@ class CreateCollectionComponent extends React.Component {
                                     <div className="modal-body">
                                         <div>
 
-                                            <h2>Create Collection</h2>
-                                            <hr />
                                             {
                                                 !this.state.formState.isFormValid &&
                                                 <div className="alert alert-danger">Please fill in all the fields and try again </div>
@@ -138,24 +129,16 @@ class CreateCollectionComponent extends React.Component {
 
                                                     </label>
                                                 </div>
-                                                <button style={{ marginRight: 16 }} type="submit" className="btn btn-secondary"> Cancel </button>
-                                                <button type="submit" className="btn btn-success"> Create </button>
+                                                <button style={{ marginRight: 16 }} type="reset" className="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+                                                <button onClick={this.props.saveChanges} type="submit" className="btn btn-success" > Create </button>
 
                                             </form>
-
-
+                                            
                                         </div>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-primary">Save changes</button>
-                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <p> Create Collection</p>
-                        <button onClick={this.buttonClicked}> Create Collection </button>
 
                     </div>
                 </div>

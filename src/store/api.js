@@ -1,53 +1,61 @@
+function fetchUrlData(store, action) {
+  var httpOptions = {};
+  if (action.params.length > 0 && action.params[0].key != "") {
+    var paramString = "";
+    action.params.map(p => {
+      paramString += `${p.key}=${p.value}&`;
+    });
+  }
 
-function fetchUrlData(store, action){
-   let url = action.data.url
-   let params = action.data.params
+  action.url = `${action.url}?${encodeURI(paramString)}`;
 
-    let httpOptions = {
-        methods: action.data.method,
-        headers: action.data.headers
-    };
+  if (action.headers.length > 0 && action.headers[0].key != "") {
+    let key = [];
+    let value = [];
+    var headers = {};
 
-    if(action.data.method !== "GET") {
-        httpOptions.body = action.data.body;
-    
-        if(typeof httpOptions.body !== "string") {
-            httpOptions.body = JSON.stringify(httpOptions.body);
-        }
+    for (var i = 0; i < action.headers.length; i++) {
+      key.push(action.headers[i].key);
+      value.push(action.headers[i].value);
     }
 
-    if(params){ 
-      encodeURI(params)
-      url = url.concat(params)
-    }
+    key.forEach((key, i) => {
+      headers[key] = value[i];
+    });
 
-    // TODO: Convert params to url encoded form here
-    // encodeURI - use this function
-    // you have to check for params in the action.data
-    // if present, you have convert action.data.url to urlencoded from
+    httpOptions.headers = headers;
+  }
 
-    fetch (url, httpOptions)
-        .then(function(response){
-            console.log(response)
-            return response.json();
-        })
-        
-        .then(function(data){
-            console.log("RESPONSE FROM API>JS", data)
-            store.dispatch({
-                type:"FETCH_DATA_SUCCESS",
-                response: data
-            })
-        })
-        .catch(function(err){
-            console.log("fetch error", err);
-            // dispatch FETCH_DATA_ERROR
-            store.dispatch({
-                type:"FETCH_ERROR",
-                response: {"status": "failed"}
-            })
-        })
-    
+  if (action.method != "GET") {
+    httpOptions.method = action.method;
+  }
+
+  if (action.jsonBody) {
+    httpOptions.body = action.jsonBody;
+  }
+
+  console.log("http", httpOptions);
+
+  fetch(action.url, httpOptions)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    })
+
+    .then(function(data) {
+      console.log("RESPONSE FROM API>JS", data);
+      store.dispatch({
+        type: "FETCH_DATA_SUCCESS",
+        response: data
+      });
+    })
+    .catch(function(err) {
+      console.log("fetch error", err);
+      store.dispatch({
+        type: "FETCH_ERROR",
+        response: { status: "failed" }
+      });
+    });
 }
 
-export {fetchUrlData}
+export { fetchUrlData };
